@@ -7,7 +7,7 @@ namespace ArtOrder03.Infrastructure.Data
     {
         [Key]
         [StringLength(64)]
-        public Guid Id { get; set; } = Guid.NewGuid();
+        public int Id { get; set; }
 
         [Required]
         public DateTime OrderDate { get; set; }
