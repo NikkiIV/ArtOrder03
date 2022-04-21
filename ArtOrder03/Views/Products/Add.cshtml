@@ -2,58 +2,59 @@
 @model AddProductFormModel
 
 @{
-    ViewData["Title"] = "Add Product Page";
+    ViewData["Title"] = "Add new product";
 }
-@*
-public string Name { get; set; }
-
-        public string CategoryId { get; set; }
-
-        public string Description { get; set; }
-
-        public string ImageUrl { get; set; }        
-
-        public string Price { get; set; }*@
 
 <div calss="container">
     <div class="row">
         <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
             <h2 class="heading-margin text-center">@ViewBag.Title</h2>
             
-            <form method="post">
-                @*IMAGE*@
-
+            <form method="post">                
                 @*Title*@
                 <div class="mb-3">
-                    <label asp-for="Name" class="form-label">Name:</label>
-                    <input type="email" class="form-control" placeholder="Use up to 4 words to describe the product...">
+                    <label asp-for="Name" class="form-label">Name Product:</label>
+                    <input asp-for="Name" class="form-control" placeholder="Use up to 4 words to describe the product...">
+                </div>                
+                <br/>
+                @*IMAGE*@
+                 <div class="mb-3">
+                    <label asp-for="ImageUrl" class="form-label">Image:</label>
+                    <input asp-for="ImageUrl" class="form-control" placeholder="Your URL here...">
                 </div>                
                 <br/>
                 @*Category*@
                 <div class="mb-3">
                     <label asp-for="CategoryId" class="form-label">Category:</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>choose Category here...</option>                        
+                    <select asp-for="CategoryId" class="form-select">
+                        @*hard coded*@
+                        @*<option selected>choose Category here...</option>                        
                         <option value="1">Prints</option>
                         <option value="2">Stickers</option>
                         <option value="3">Pins</option>
-                        <option value="4">Magnets</option>
+                        <option value="4">Magnets</option>*@
+                        <option value="" selected disabled>choose your Category here...</option>
+                        @foreach(var category in Model.ProductCategories)
+                        {
+                            <option value="@category.Id">@category.Name</option>
+                        }
                     </select>
                 </div>
                 <br/>    
                 @*Description*@
                 <div class="mb-3">
                     <label asp-for="Description" class="form-label">Description:</label>                    
-                    <textarea asp-for="Description" class="form-control" placeholder="Describe the product here..." rows="3"></textarea>
+                    <textarea asp-for="Description" class="form-control" placeholder="Describe the product here..." rows="4"></textarea>
                 </div>
-
+                <br/>
                 @*PRICE*@
-                <div class="input-group mb-3">
+                <div class="input-group">
+                    <label asp-for="Price" class="form-label">Price:</label>
+                    <input asp-for="Price" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
                     <span class="input-group-text">$</span>
-                    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-                    <span class="input-group-text">.00</span>
+                    <span class="input-group-text">0.00</span>
                 </div>
-
+                <br/>
                 <input class="btn btn-primary mt-3" type="submit" value="Save" />
             </form>
         </div>
