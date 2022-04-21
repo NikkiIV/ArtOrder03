@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtOrder03", "ArtOrder03\ArtOrder03.csproj", "{83DEB253-730D-4F07-9FE1-51EFE7AF8A0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArtOrder03", "ArtOrder03\ArtOrder03.csproj", "{83DEB253-730D-4F07-9FE1-51EFE7AF8A0E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtOrder03.Core", "ArtOrder03.Core\ArtOrder03.Core.csproj", "{9E531AA4-9DFD-439E-A382-FC2B2473D6A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtOrder03.Infrastructure", "ArtOrder03.Infrastructure\ArtOrder03.Infrastructure.csproj", "{7108F621-261F-461E-B893-2F9A04930EDD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{83DEB253-730D-4F07-9FE1-51EFE7AF8A0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83DEB253-730D-4F07-9FE1-51EFE7AF8A0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83DEB253-730D-4F07-9FE1-51EFE7AF8A0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E531AA4-9DFD-439E-A382-FC2B2473D6A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E531AA4-9DFD-439E-A382-FC2B2473D6A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E531AA4-9DFD-439E-A382-FC2B2473D6A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E531AA4-9DFD-439E-A382-FC2B2473D6A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7108F621-261F-461E-B893-2F9A04930EDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7108F621-261F-461E-B893-2F9A04930EDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7108F621-261F-461E-B893-2F9A04930EDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7108F621-261F-461E-B893-2F9A04930EDD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
