@@ -28,11 +28,11 @@ namespace ArtOrder03.Infrastructure.Data
         public string? Comments { get; set; }
 
         //---CommissionOrder
-        [Required]
-        [ForeignKey(nameof(CommissionOrder))]
-        public int CommissionOrderId { get; set; }
+        //[Required]
+        //[ForeignKey(nameof(CommissionOrder))]
+        //public int CommissionOrderId { get; set; }
 
-        [Required]
-        public CommissionOrder CommissionOrder { get; set; }        
+        //[Required]
+        //public CommissionOrder CommissionOrder { get; set; }        
     }
 }

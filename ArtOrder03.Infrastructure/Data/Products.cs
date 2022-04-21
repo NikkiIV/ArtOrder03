@@ -13,8 +13,8 @@ namespace ArtOrder03.Infrastructure.Data
         [StringLength(35, MinimumLength = 5)]
         public string Name { get; set; }
                 
-        [Column(TypeName = "decimal(18,2)")]
-        public decimal Quantity { get; set; }
+        //[Column(TypeName = "decimal(18,2)")]
+        //public decimal Quantity { get; set; }
 
         [Required]
         public string Description { get; set; }

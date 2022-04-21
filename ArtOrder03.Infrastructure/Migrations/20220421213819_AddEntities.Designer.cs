@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ArtOrder03.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220421110305_Categories")]
-    partial class Categories
+    [Migration("20220421213819_AddEntities")]
+    partial class AddEntities
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -81,6 +81,72 @@ namespace ArtOrder03.Infrastructure.Migrations
                     b.ToTable("Commissions");
                 });
 
+            modelBuilder.Entity("ArtOrder03.Infrastructure.Data.CommissionInfo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Comments")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DueDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CommissionInfos");
+                });
+
+            modelBuilder.Entity("ArtOrder03.Infrastructure.Data.CommissionOrder", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(160)
+                        .HasColumnType("nvarchar(160)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("CommissionOrders");
+                });
+
             modelBuilder.Entity("ArtOrder03.Infrastructure.Data.Products", b =>
                 {
                     b.Property<int>("Id")
@@ -110,17 +176,14 @@ namespace ArtOrder03.Infrastructure.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("Quantity")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("SaleId")
+                    b.Property<int?>("SalesId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("SaleId");
+                    b.HasIndex("SalesId");
 
                     b.ToTable("Products");
                 });
@@ -372,6 +435,17 @@ namespace ArtOrder03.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("ArtOrder03.Infrastructure.Data.CommissionOrder", b =>
+                {
+                    b.HasOne("ArtOrder03.Infrastructure.Identity.ApplicationUser", "User")
+                        .WithMany("CommissionOrders")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("ArtOrder03.Infrastructure.Data.Products", b =>
                 {
                     b.HasOne("ArtOrder03.Infrastructure.Data.Categories", "Category")
@@ -380,21 +454,17 @@ namespace ArtOrder03.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ArtOrder03.Infrastructure.Data.Sales", "Sale")
+                    b.HasOne("ArtOrder03.Infrastructure.Data.Sales", null)
                         .WithMany("Products")
-                        .HasForeignKey("SaleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SalesId");
 
                     b.Navigation("Category");
-
-                    b.Navigation("Sale");
                 });
 
             modelBuilder.Entity("ArtOrder03.Infrastructure.Data.Sales", b =>
                 {
                     b.HasOne("ArtOrder03.Infrastructure.Identity.ApplicationUser", "User")
-                        .WithMany()
+                        .WithMany("Sales")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -465,7 +535,11 @@ namespace ArtOrder03.Infrastructure.Migrations
 
             modelBuilder.Entity("ArtOrder03.Infrastructure.Identity.ApplicationUser", b =>
                 {
+                    b.Navigation("CommissionOrders");
+
                     b.Navigation("Commissions");
+
+                    b.Navigation("Sales");
                 });
 #pragma warning restore 612, 618
         }

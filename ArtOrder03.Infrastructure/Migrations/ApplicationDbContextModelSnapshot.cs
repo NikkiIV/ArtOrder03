@@ -90,9 +90,6 @@ namespace ArtOrder03.Infrastructure.Migrations
                     b.Property<string>("Comments")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CommissionOrderId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DueDate")
                         .HasColumnType("datetime2");
 
@@ -115,8 +112,6 @@ namespace ArtOrder03.Infrastructure.Migrations
                         .HasColumnType("nvarchar(30)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CommissionOrderId");
 
                     b.ToTable("CommissionInfos");
                 });
@@ -179,17 +174,14 @@ namespace ArtOrder03.Infrastructure.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("Quantity")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("SaleId")
+                    b.Property<int?>("SalesId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("SaleId");
+                    b.HasIndex("SalesId");
 
                     b.ToTable("Products");
                 });
@@ -441,17 +433,6 @@ namespace ArtOrder03.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("ArtOrder03.Infrastructure.Data.CommissionInfo", b =>
-                {
-                    b.HasOne("ArtOrder03.Infrastructure.Data.CommissionOrder", "CommissionOrder")
-                        .WithMany()
-                        .HasForeignKey("CommissionOrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CommissionOrder");
-                });
-
             modelBuilder.Entity("ArtOrder03.Infrastructure.Data.CommissionOrder", b =>
                 {
                     b.HasOne("ArtOrder03.Infrastructure.Identity.ApplicationUser", "User")
@@ -471,15 +452,11 @@ namespace ArtOrder03.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ArtOrder03.Infrastructure.Data.Sales", "Sale")
+                    b.HasOne("ArtOrder03.Infrastructure.Data.Sales", null)
                         .WithMany("Products")
-                        .HasForeignKey("SaleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SalesId");
 
                     b.Navigation("Category");
-
-                    b.Navigation("Sale");
                 });
 
             modelBuilder.Entity("ArtOrder03.Infrastructure.Data.Sales", b =>
