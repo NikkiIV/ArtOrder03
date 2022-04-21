@@ -33,15 +33,6 @@ namespace ArtOrder03.Infrastructure.Data
                
         [Required]
         [Column(TypeName = "decimal(18,2)")]
-        public decimal Price { get; set; }
-
-        //-----SALE
-        [Required]
-        [ForeignKey(nameof(Sale))]
-        public int SaleId { get; set; }
-
-        [Required]
-        public Sales Sale { get; set; }
-       
+        public decimal Price { get; set; }       
     }
 }

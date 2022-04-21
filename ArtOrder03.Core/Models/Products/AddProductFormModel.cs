@@ -9,17 +9,25 @@ namespace ArtOrder03.Core.Models.Products
 {
     public class AddProductFormModel
     {
+        [Required]
+        [MinLength(3)]
+        [MaxLength(20)]
         public string Name { get; set; }
 
         [Display(Name = "Category")]
-        public string CategoryId { get; set; }
-
+        public int CategoryId { get; set; }
+        
+        [Required]
+        [MinLength(3)]
         public string Description { get; set; }
 
-        public string ImageUrl { get; set; }        
+        [Required]
+        [Url]
+        public string ImageUrl { get; set; }
+        
+        [Required]
+        public decimal Price { get; set; }
 
-        public string Price { get; set; }
-
-        public IEnumerable<ProductCategoryViewModel> ProductCategories { get; set; }
+        public IEnumerable<ProductCategoryViewModel>? ProductCategories { get; set; }
     }
 }
