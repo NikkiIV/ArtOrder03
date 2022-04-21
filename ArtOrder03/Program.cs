@@ -1,3 +1,4 @@
+using ArtOrder03.Extensions;
 using ArtOrder03.Infrastructure.Data;
 using ArtOrder03.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
@@ -24,6 +25,8 @@ builder.Services.AddControllersWithViews();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.PrepareDatabase();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
