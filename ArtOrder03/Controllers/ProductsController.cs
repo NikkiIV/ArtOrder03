@@ -23,6 +23,25 @@ namespace ArtOrder03.Controllers
             return View(productNames);
         }
 
+        public IActionResult All()
+        {
+            var products = this.data
+                .Products
+                .OrderByDescending(p => p.Id)
+                .Select(p => new ProductListingViewModel
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Description = p.Description,    
+                    ImageUrl = p.ImageUrl,
+                    Price = p.Price,
+                    Category = p.Category.Name
+                })
+                .ToList();
+
+            return View(products);
+        }
+
         [HttpPost]
         public IActionResult Add(AddProductFormModel product)
         {
