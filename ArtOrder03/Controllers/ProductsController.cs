@@ -39,7 +39,10 @@ namespace ArtOrder03.Controllers
                 })
                 .ToList();
 
-            return View(products);
+            return View(new AllProductsSearchViewModel
+            {
+                Products = products
+            });
         }
 
         [HttpPost]

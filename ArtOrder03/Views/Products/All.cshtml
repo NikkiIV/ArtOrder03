@@ -1,9 +1,23 @@
 ﻿@using ArtOrder03.Core.Models.Products
-@model IEnumerable<ProductListingViewModel>
+@model AllProductsSearchViewModel
+
+<form method="get">
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label asp-for="SearchTerm"><h5>Search:</h5></label>
+            <input asp-for="SearchTerm" class="form-control" placeholder="...">            
+        </div>
+        <div class="form-group col-md-4">
+            <label asp-for="SearchTerm"><h5>Search:</h5></label>
+            <input asp-for="SearchTerm" class="form-control" placeholder="...">            
+        </div>
+    </div>
+</form>
+</br>
 
 <div class="row">
-    @foreach (var product in Model)
-    {
+    @foreach (var product in Model.Products)
+    {       
         <div class="card"  style="width: 18rem;">
             <img class="card-img-top" width="300" height="250" src="@product.ImageUrl" alt="@product.Category @product.Name @product.Description @product.Price">
             <div class="card-body">
@@ -11,7 +25,7 @@
                 <p class="small text">@product.Category</p>
                 <h6 class="card-text">USD @product.Price</h6><br>
                 <p class="card-text">@product.Description</p>
-                <a asp-controller="Products" asp-action="Details"  asp-route-id="@product.Id" class="btn btn-primary">Buy</a>
+                <a asp-controller="Products" asp-action="Details" asp-route-id="@product.Id" class="btn btn-primary">Buy</a>
             </div>
         </div>
     }
