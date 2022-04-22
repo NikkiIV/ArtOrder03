@@ -13,5 +13,7 @@ namespace ArtOrder03.Core.Models.Products
         public string Name { get; init; }
 
         public string ImageUrl { get; set; }
+
+        public string Description { get; init; }
     }
 }

@@ -27,7 +27,8 @@ namespace ArtOrder03.Controllers
                 {
                     Id = c.Id,
                     Name = c.Name,
-                    ImageUrl = c.ImageUrl
+                    ImageUrl = c.ImageUrl,
+                    Description = c.Description
                 })
                 .ToList();
 

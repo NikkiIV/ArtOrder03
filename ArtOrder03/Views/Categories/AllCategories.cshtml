@@ -5,10 +5,11 @@
     @foreach (var allcategories in Model)
     {
         <div class="card"  style="width: 18rem;">
-            <img class="card-img-top" src="@allcategories.ImageUrl" alt="@allcategories.Id @allcategories.Name">
+            <img class="card-img-top" width="300" height="250" src="@allcategories.ImageUrl" alt="@allcategories.Name @allcategories.Name @allcategories.Description">
+            
             <div class="card-body">
                 <h5 class="card-title">@allcategories.Name</h5>
-                <p class="card-text text-center">Original wall art designed and sold by artists and printed for you when you order.</p>
+                <p class="card-text">@allcategories.Description</p>
                 <a asp-controller="Categories" asp-action="Details"  asp-route-id="@allcategories.Id" class="btn btn-primary">Browse</a>
             </div>
         </div>
