@@ -11,7 +11,7 @@
                 <p class="small text">@product.Category</p>
                 <h6 class="card-text">USD @product.Price</h6><br>
                 <p class="card-text">@product.Description</p>
-                <a href="#" class="btn btn-primary">Buy</a>
+                <a asp-controller="Products" asp-action="Details"  asp-route-id="@product.Id" class="btn btn-primary">Buy</a>
             </div>
         </div>
     }
