@@ -69,7 +69,7 @@ namespace ArtOrder03.Controllers
             this.data.Products.Add(productData);
             this.data.SaveChanges();
             
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(nameof(All));
         }
 
         private IEnumerable<ProductCategoryViewModel> GetProductCategories()

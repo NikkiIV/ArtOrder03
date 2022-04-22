@@ -1,6 +1,20 @@
-﻿@{
+﻿@using ArtOrder03.Core.Models.Home
+@model IndexViewModel
+
+@{
+
     ViewData["Title"] = "";
 }
+
+<div class="mb-5"></div>
+<div class="jumbotron">
+    <div class="row">
+        <h4 class="col-md-12 text-center">
+            We have @Model.TotalProducts Products and our @Model.TotalUsers Users have made @Model.TotalCommissions Commissions through our website
+        </h4>
+    </div>
+</div>
+
 <div>
     <center>
         <img class="logo" src="~/img/ArtOrderLogo.png">
