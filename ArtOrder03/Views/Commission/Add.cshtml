@@ -1,0 +1,72 @@
+﻿@using ArtOrder03.Core.Models.Commission
+@model AddCommissionFormModel
+
+@{
+    ViewData["Title"] = "Commission Order";
+}
+
+
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <h2 class="heading-margin text-center">@ViewBag.Title</h2>
+
+        <div class="container">
+            <div class="content text-justify">
+                <h5 class="text-bold">Terms & conditions</h5>
+                </br>
+
+                <div class="text">
+                    <p>Commissions will take a week to a month to complete depending on where you're in in the commission queue.</p>
+                    
+                    <p>In the eventuality that the commission has to be cancelled you will be refunded in full. If you decide to cancel the commission after you've paid the invoice there will be no refund.</p>
+                    
+                   <p>These are personal commissions, you can use them & distribute them as you wish unless it is for commercial purposes or to  make money off of them.</p>
+                    
+                    <p><center><strong>I retain the right to refuse a commission.</strong></center></p>                 
+                </div>
+                </br>
+            </div>
+        </div>
+
+        <form method="post">
+            @*Title*@
+            <div class="form-group">
+                <label asp-for="Name" class="form-label"><strong>Title:</strong></label>
+                <p class="small text"> example: <i>BLACK AND WHITE SKETCH</i></p> 
+                <input asp-for="Name" class="form-control" placeholder="Title for your commission...">
+                <span asp-validation-for="Name" class="small text-danger"></span>
+            </div>
+            <br />
+            @*Type*@
+            <div class="form-group">
+                <label asp-for="Type" class="form-label"><strong>Type:</strong></label>
+                <p class="small text">Traditional or Digital | Sketch or Lineart | Monochrome or Colored</p>
+                <input asp-for="Type" class="form-control" placeholder="Example: Traditional Sketch Monochrome...">
+
+                <span asp-validation-for="Name" class="small text-danger"></span>
+            </div>
+            <br /> 
+            @*Description*@
+            <div class="form-group">
+                <label asp-for="Description" class="form-label"><strong>Description:</strong></label>
+                <p class="small text"> The overall idea for the art piece</p>
+                <textarea asp-for="Description" class="form-control" placeholder="Describe your commission..." rows="4"></textarea>
+                <span asp-validation-for="Description" class="small text-danger"></span>
+
+            </div>
+            <br />
+            @*Details*@
+            <div class="form-group">
+                <label asp-for="Details" class="form-label"><strong>Details:</strong></label>
+                <p class="small text"> Pose, expression, accessories and details, specific things you want to be included</p>
+                <textarea asp-for="Details" class="form-control" placeholder="Specific details for your commission..." rows="4"></textarea>
+                <span asp-validation-for="Details" class="small text-danger"></span>
+
+            </div>
+            <br />
+           
+            <input class="btn btn-primary mt-3" type="submit" value="SUBMIT" />
+        </form>
+    </div>
+</div>

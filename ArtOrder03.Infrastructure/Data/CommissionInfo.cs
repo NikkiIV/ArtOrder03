@@ -27,6 +27,14 @@ namespace ArtOrder03.Infrastructure.Data
 
         public string? Comments { get; set; }
 
+        [Required]
+        [StringLength(30)]
+        public string Details { get; set; }
+
+        [Required]
+        [StringLength(160)]
+        public string Description { get; set; }
+
         //---CommissionOrder
         //[Required]
         //[ForeignKey(nameof(CommissionOrder))]

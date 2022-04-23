@@ -1,17 +1,45 @@
 ﻿@using ArtOrder03.Core.Models.Products
 @model IEnumerable<CategoryListingViewModel>
 
+
+<div style="text-align:center">
+    <div class="btn-group" role="group" aria-label="Category Buttons">
+        <form action="https://localhost:7098/Products/All?SearchTerm=Magnets">
+            <input type="submit" class="btn btn-outline-primary" value="BROWSE MAGNETS" />
+        </form>
+        <div class="space">
+        </div>
+        <form action="https://localhost:7098/Products/All?SearchTerm=Pins">
+            <input type="submit" class="btn btn-outline-primary" value="BROWSE PINS" />
+        </form>
+        <div class="space">
+        </div>
+        <form action="https://localhost:7098/Products/All?SearchTerm=Stickers">
+            <input type="submit" class="btn btn-outline-primary" value="BROWSE STICKERS" />
+        </form>
+        <div class="space">
+        </div>
+        <form action="https://localhost:7098/Products/All?SearchTerm=Prints">
+            <input type="submit" class="btn btn-outline-primary" value="BROWSE PRINTS" />
+        </form>
+    </div>
+</div>
+</br>
+
 <div class="row">
+    
     @foreach (var allcategories in Model)
     {
         <div class="card"  style="width: 18rem;">
-            <img class="card-img-top" width="300" height="250" src="@allcategories.ImageUrl" alt="@allcategories.Name @allcategories.Name @allcategories.Description">
+            <img class="card-img-top" width="400" height="250" src="@allcategories.ImageUrl" alt="@allcategories.Name @allcategories.Description">
             
             <div class="card-body">
                 <h5 class="card-title">@allcategories.Name</h5>
                 <p class="card-text">@allcategories.Description</p>
-                <a asp-controller="Categories" asp-action="Details"  asp-route-id="@allcategories.Id" class="btn btn-primary">Browse</a>
+                @*<a asp-controller="Categories" asp-action="Details"  asp-route-id="@allcategories.Id" class="btn btn-primary">Browse</a>*@
             </div>
+        </div>
+        <div class="space">
         </div>
     }
 </div>

@@ -25,3 +25,9 @@ body {
 img {
     object-fit: cover;
 }
+
+.space {
+    width: 40px;
+    height: auto;
+    display: inline-block;
+}
