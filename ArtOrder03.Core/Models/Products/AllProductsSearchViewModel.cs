@@ -9,9 +9,9 @@ namespace ArtOrder03.Core.Models.Products
 {
     public class AllProductsSearchViewModel
     {
-        public IEnumerable<string> Categories { get; init; }
+        public IEnumerable<string>? Categories { get; init; }
         
-        public IEnumerable<string> SearchTerm { get; init; }
+        public string SearchTerm { get; init; }
 
         public AllProductsSorting Sorting { get; init; }
 

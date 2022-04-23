@@ -2,15 +2,20 @@
 @model AllProductsSearchViewModel
 
 <form method="get">
-    <div class="row">
+    <div class="row mb-5">
+        @*Category*@
+            
         <div class="form-group col-md-4">
             <label asp-for="SearchTerm"><h5>Search:</h5></label>
-            <input asp-for="SearchTerm" class="form-control" placeholder="...">            
+            <input asp-for="SearchTerm" class="form-control" placeholder="Type your search word here...">            
         </div>
-        <div class="form-group col-md-4">
-            <label asp-for="SearchTerm"><h5>Search:</h5></label>
-            <input asp-for="SearchTerm" class="form-control" placeholder="...">            
+        <div class="form-group col-md-3">
+            
         </div>
+        @*<div>
+            <input type="submit" class="btn btn-primary d-none"/>
+        </div>*@
+        
     </div>
 </form>
 </br>
