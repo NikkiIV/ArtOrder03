@@ -28,11 +28,11 @@ namespace ArtOrder03.Infrastructure.Data
         public string? Comments { get; set; }
 
         [Required]
-        [StringLength(30)]
+        [StringLength(200)]
         public string Details { get; set; }
 
         [Required]
-        [StringLength(160)]
+        [StringLength(200)]
         public string Description { get; set; }
 
         //---CommissionOrder
