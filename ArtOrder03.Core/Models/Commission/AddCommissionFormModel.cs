@@ -23,5 +23,7 @@ namespace ArtOrder03.Core.Models.Commission
         [Required]
         [MinLength(3)]
         public string Description { get; set; }
+
+        public string Status { get; set; }
     }
 }

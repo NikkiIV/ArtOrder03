@@ -35,7 +35,7 @@
                 <label asp-for="Name" class="form-label"><strong>Title:</strong></label>
                 <p class="small text"> example: <i>BLACK AND WHITE SKETCH</i></p> 
                 <input asp-for="Name" class="form-control" placeholder="Title for your commission...">
-                <span asp-validation-for="Name" class="small text-danger"></span>
+                
             </div>
             <br />
             @*Type*@
@@ -44,7 +44,6 @@
                 <p class="small text">Traditional or Digital | Sketch or Lineart | Monochrome or Colored</p>
                 <input asp-for="Type" class="form-control" placeholder="Example: Traditional Sketch Monochrome...">
 
-                <span asp-validation-for="Name" class="small text-danger"></span>
             </div>
             <br /> 
             @*Description*@
@@ -52,8 +51,7 @@
                 <label asp-for="Description" class="form-label"><strong>Description:</strong></label>
                 <p class="small text"> The overall idea for the art piece</p>
                 <textarea asp-for="Description" class="form-control" placeholder="Describe your commission..." rows="4"></textarea>
-                <span asp-validation-for="Description" class="small text-danger"></span>
-
+                
             </div>
             <br />
             @*Details*@
@@ -61,11 +59,18 @@
                 <label asp-for="Details" class="form-label"><strong>Details:</strong></label>
                 <p class="small text"> Pose, expression, accessories and details, specific things you want to be included</p>
                 <textarea asp-for="Details" class="form-control" placeholder="Specific details for your commission..." rows="4"></textarea>
-                <span asp-validation-for="Details" class="small text-danger"></span>
-
+                
             </div>
             <br />
-           
+             @*Status*@
+            <div class="form-group">
+                <label asp-for="Status" class="form-label"><strong>Status:</strong></label>
+                <p class="small text">Not Urgent | Urgent</p>
+                <input asp-for="Status" class="form-control" placeholder="...">
+
+            </div>
+            <br /> 
+                       
             <input class="btn btn-primary mt-3" type="submit" value="SUBMIT" />
         </form>
     </div>
