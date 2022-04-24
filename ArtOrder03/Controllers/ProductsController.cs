@@ -23,22 +23,27 @@ namespace ArtOrder03.Controllers
             return View(productNames);
         }
 
-        public IActionResult All(string searchTerm)
+        public IActionResult All(
+            string searchTerm,
+            AllProductsSorting sorting)
         {
-            var productSearch = this.data.Products.AsQueryable();
-
-            
-
+            var productQuery = this.data.Products.AsQueryable();
+                      
             if (!string.IsNullOrWhiteSpace(searchTerm))
             {
-                productSearch = productSearch.Where(p => 
+                productQuery = productQuery.Where(p => 
                 p.Category.Name == searchTerm ||
                 p.Description.ToLower().Contains(searchTerm.ToLower()) ||
                 p.Name.ToLower().Contains(searchTerm.ToLower()));
             }
 
-            var products = productSearch
-                .OrderByDescending(p => p.Id)
+            productQuery = sorting switch
+            {
+                AllProductsSorting.DateCreatedAscending => productQuery.OrderBy(p => p.Id),
+                AllProductsSorting.DateCreatedDescending => productQuery.OrderByDescending(p => p.Id)                
+            };
+
+            var products = productQuery
                 .Select(p => new ProductListingViewModel
                 {
                     Id = p.Id,
@@ -50,10 +55,17 @@ namespace ArtOrder03.Controllers
                 })
                 .ToList();
 
+            //productQuery = query.Sorting switch
+            //{
+            //    productQuery.DateCreatedAscending => productQuery.OrderBy(r => r.Id),
+            //    productQuery.DateCreatedDescending or _ => productQuery.OrderByDescending(r => r.Id)
+            //};
+
             return View(new AllProductsSearchViewModel
             {
                 Products = products,
-                SearchTerm = searchTerm
+                SearchTerm = searchTerm,
+                Sorting = sorting
             });
         }
 

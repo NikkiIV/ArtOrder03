@@ -1,6 +1,8 @@
 ﻿using ArtOrder03.Core.Models.Commission;
 using ArtOrder03.Infrastructure.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace ArtOrder03.Controllers
 {
@@ -29,19 +31,20 @@ namespace ArtOrder03.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Add(AddCommissionFormModel commission)
         {
             
-            var commissionData = new CommissionInfo
+            var commissionData = new Commission
             {
                 Name = commission.Name,
                 Type = commission.Type,
                 Details = commission.Details,
                 Description = commission.Description,
-                Status = commission.Status
+                UserId = User.FindFirstValue(ClaimTypes.NameIdentifier)
             };
 
-            this.data.CommissionInfos.Add(commissionData);
+            this.data.Commissions.Add(commissionData);
             this.data.SaveChanges();
 
             return RedirectToAction(nameof(Success));

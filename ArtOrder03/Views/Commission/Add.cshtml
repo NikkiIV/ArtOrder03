@@ -5,8 +5,6 @@
     ViewData["Title"] = "Commission Order";
 }
 
-
-
 <div class="row">
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
         <h2 class="heading-margin text-center">@ViewBag.Title</h2>
@@ -63,13 +61,13 @@
             </div>
             <br />
              @*Status*@
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="Status" class="form-label"><strong>Status:</strong></label>
                 <p class="small text">Not Urgent | Urgent</p>
                 <input asp-for="Status" class="form-control" placeholder="...">
 
             </div>
-            <br /> 
+            <br /> *@
                        
             <input class="btn btn-primary mt-3" type="submit" value="SUBMIT" />
         </form>

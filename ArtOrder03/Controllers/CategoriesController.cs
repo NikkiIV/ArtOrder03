@@ -34,5 +34,10 @@ namespace ArtOrder03.Controllers
 
             return View(allcategories);
         }
+
+        //public IActionResult OneCategory()
+        //{
+        //    //make a view that redirects to product of specific category
+        //}
     }
 }

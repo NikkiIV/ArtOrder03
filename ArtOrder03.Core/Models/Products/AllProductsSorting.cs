@@ -8,8 +8,7 @@ namespace ArtOrder03.Core.Models.Products
 {
     public enum AllProductsSorting
     {
-        DateCreated = 0,
-        WhichCategory = 1,
-        WhatPrice = 2
+        DateCreatedDescending = 0,
+        DateCreatedAscending = 1
     }
 }

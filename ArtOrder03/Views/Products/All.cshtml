@@ -8,11 +8,22 @@
             <label asp-for="SearchTerm"><h5>Search:</h5></label>
             <input asp-for="SearchTerm" class="form-control" placeholder="Type your search word here...">            
         </div>
+          
         <div class="form-group col-md-3">
-            
+            <div class="form-group">
+                <label asp-for="Sorting" class="form-label">Sorting:</label>
+                <select asp-for="Sorting" class="form-select">
+                    <option value="0" selected>Date Created Descending</option>
+                    <option value="1">Date Created Ascending</option>
+                </select>
+                <input type="submit" class="btn btn-primary" value="Sort">
+            </div>
         </div>
-        @*<div>
-            <input type="submit" class="btn btn-primary d-none"/>
+
+        @*<div class="form-group col-md-3 text-center">
+            <input type="submit" class="btn btn-primary" value="Search">
+                        //if i wanna remove the button
+                <input type="submit" class="btn btn-primary d-none">
         </div>*@
         
     </div>
