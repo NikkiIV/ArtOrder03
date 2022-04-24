@@ -11,7 +11,7 @@ namespace ArtOrder03.Infrastructure.Data
         public int Id { get; set; }
 
         [Required]
-        public DateTime OrderDate { get; set; }
+        public DateTime? OrderDate { get; set; }
 
         ////----USER
         [Required]

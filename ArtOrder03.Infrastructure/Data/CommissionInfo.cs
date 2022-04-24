@@ -41,6 +41,6 @@ namespace ArtOrder03.Infrastructure.Data
         //public int CommissionOrderId { get; set; }
 
         //[Required]
-        //public CommissionOrder CommissionOrder { get; set; }        
+        //public CommissionOrder CommissionOrder { get; set; }
     }
 }
