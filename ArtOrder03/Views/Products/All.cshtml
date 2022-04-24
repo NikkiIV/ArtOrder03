@@ -1,15 +1,20 @@
 ﻿@using ArtOrder03.Core.Models.Products
 @model AllProductsSearchViewModel
 
+
+@{
+    ViewData["Title"] = "All products";
+}
+
 <form method="get">
-    <div class="row mb-5">
+    <div class="row">
         @*Category*@            
         <div class="form-group col-md-4">
             <label asp-for="SearchTerm"><h5>Search:</h5></label>
             <input asp-for="SearchTerm" class="form-control" placeholder="Type your search word here...">            
         </div>
           
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-4">
             <div class="form-group">
                 <label asp-for="Sorting" class="form-label">Sorting:</label>
                 <select asp-for="Sorting" class="form-select">
@@ -30,6 +35,38 @@
 </form>
 </br>
 
+@{
+    var previousPage = Model.CurrentPage - 1;
+    if (previousPage < 1) 
+    {
+        previousPage = 1;
+    }
+
+    var maxPage = Math.Ceiling((double)Model.TotalProducts / AllProductsSearchViewModel.ProductsPerPage);
+}
+
+<div class="row text-center mb-3">
+    <div class="col-md-6">
+        <a class="btn btn-outline-primary 
+        @(Model.CurrentPage == 1 ? "disabled" : string.Empty)" 
+        asp-controller="Products" 
+        asp-action="All" 
+        asp-route-CurrentPage="@(previousPage)"
+        asp-route-SearchTerm="@Model.SearchTerm"
+        asp-route-Sorting="@((int)Model.Sorting)">◄ PREVIOUS</a>
+    </div>
+        <div class="col-md-6">
+        <a class="btn btn-outline-primary 
+        @(Model.CurrentPage == maxPage ? "disabled" : string.Empty)" 
+        asp-controller="Products" 
+        asp-action="All" 
+        asp-route-CurrentPage="@(Model.CurrentPage + 1)"
+        asp-route-SearchTerm="@Model.SearchTerm"
+        asp-route-Sorting="@((int)Model.Sorting)">NEXT ►</a>
+    </div>
+</div>
+
+
 <div class="row">
     @foreach (var product in Model.Products)
     {       
@@ -39,9 +76,11 @@
                 <h5 class="card-title">@product.Name</h5>
                 <p class="small text">@product.Category</p>
                 <h6 class="card-text">USD @product.Price</h6><br>
-                <p class="card-text">@product.Description</p>
-                <a asp-controller="Products" asp-action="Details" asp-route-id="@product.Id" class="btn btn-primary">Buy</a>
+                @*<p class="card-text">@product.Description</p>*@
+                <a asp-controller="Products" asp-action="Details" asp-route-id="@product.Id" class="btn btn-outline-primary">Details</a>
             </div>
+        </div>
+        <div class="space">
         </div>
     }
 </div>

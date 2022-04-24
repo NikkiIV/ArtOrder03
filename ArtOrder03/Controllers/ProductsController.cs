@@ -1,6 +1,7 @@
 ﻿using ArtOrder03.Core.Models.Products;
 using ArtOrder03.Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace ArtOrder03.Controllers
 {
@@ -23,27 +24,29 @@ namespace ArtOrder03.Controllers
             return View(productNames);
         }
 
-        public IActionResult All(
-            string searchTerm,
-            AllProductsSorting sorting)
+        public IActionResult All([FromQuery]AllProductsSearchViewModel query)
         {
             var productQuery = this.data.Products.AsQueryable();
                       
-            if (!string.IsNullOrWhiteSpace(searchTerm))
+            if (!string.IsNullOrWhiteSpace(query.SearchTerm))
             {
                 productQuery = productQuery.Where(p => 
-                p.Category.Name == searchTerm ||
-                p.Description.ToLower().Contains(searchTerm.ToLower()) ||
-                p.Name.ToLower().Contains(searchTerm.ToLower()));
+                p.Category.Name == query.SearchTerm ||
+                p.Description.ToLower().Contains(query.SearchTerm.ToLower()) ||
+                p.Name.ToLower().Contains(query.SearchTerm.ToLower()));
             }
 
-            productQuery = sorting switch
+            productQuery = query.Sorting switch
             {
                 AllProductsSorting.DateCreatedAscending => productQuery.OrderBy(p => p.Id),
                 AllProductsSorting.DateCreatedDescending => productQuery.OrderByDescending(p => p.Id)                
             };
 
+            var totalProducts = this.data.Products.Count();
+
             var products = productQuery
+                .Skip((query.CurrentPage -1) * AllProductsSearchViewModel.ProductsPerPage)
+                .Take(AllProductsSearchViewModel.ProductsPerPage)
                 .Select(p => new ProductListingViewModel
                 {
                     Id = p.Id,
@@ -61,12 +64,10 @@ namespace ArtOrder03.Controllers
             //    productQuery.DateCreatedDescending or _ => productQuery.OrderByDescending(r => r.Id)
             //};
 
-            return View(new AllProductsSearchViewModel
-            {
-                Products = products,
-                SearchTerm = searchTerm,
-                Sorting = sorting
-            });
+            query.TotalProducts = totalProducts;
+            query.Products = products;
+
+            return View(query);
         }
 
         [HttpPost]
