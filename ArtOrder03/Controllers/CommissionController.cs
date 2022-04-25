@@ -65,5 +65,33 @@ namespace ArtOrder03.Controllers
 
             return View(commissions);
         }
+
+        [Authorize]
+        public IActionResult MyCommissions()
+        {
+            var commissionsQuery = this.data.Commissions.AsQueryable();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var commissions = commissionsQuery
+                .Where(r => r.UserId == userId)
+                .Select(r => new CommissionListingViewModel
+                {
+                    Id = r.Id,
+                    Name = r.Name,
+                    Type = r.Type,
+                    Details = r.Details,
+                    Description = r.Description,
+
+                }).ToList();
+
+            var returnModel = new UserCommissionViewModel
+            {
+                UserId = userId,
+                Commissions = commissions
+            };
+
+            return View(returnModel);
+        }
+
     }
 }

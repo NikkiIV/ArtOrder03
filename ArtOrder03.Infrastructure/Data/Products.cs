@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ArtOrder03.Infrastructure.Identity;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ArtOrder03.Infrastructure.Data
@@ -33,6 +34,13 @@ namespace ArtOrder03.Infrastructure.Data
                
         [Required]
         [Column(TypeName = "decimal(18,2)")]
-        public decimal Price { get; set; }       
+        public decimal Price { get; set; }
+
+        //-----SALE
+        [Required]
+        public string SalesId { get; set; }
+
+        [ForeignKey(nameof(Sale))]
+        public Sales Sale { get; set; }
     }
 }

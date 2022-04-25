@@ -1,0 +1,51 @@
+﻿@using ArtOrder03.Core.Models.Commission
+@model UserCommissionViewModel
+
+@{
+    ViewData["Title"] = "My Commissions";
+    ViewBag.AllowCommissionEdit = true;
+
+}
+
+@if(Model.Commissions.Count() < 1)
+{
+<div>
+    <center>
+        <img class="logo" src="~/img/cry.png">
+    </center>
+</div>
+
+<div class="text-center">
+    <h2 >You do not have any commissions yet!</h2>
+    <h3 >Make an order:</h3>
+    <a  class="btn btn-primary" asp-area="" asp-controller="Commission" asp-action="Add">Submit a Commission</a>
+</div>
+}
+else
+{
+<h2 class="heading-margin text-center">@ViewBag.Title</h2>
+
+    <div class="row">
+    @foreach (var commission in Model.Commissions)
+    {
+        <div class="col-md-3">
+            <div class="card mb-3">
+                <img class="card-img-top" width="300" height="250" src="~/img/commissionImage.jpg" alt="@commission.Name @commission.Type">
+                <div class="card-body">
+                    <h5 class="card-title">@commission.Name </h5>
+                    <p class="small text">@commission.Type</p>
+                    <p class="card-text">@commission.Description</p>
+
+                    <div class="text-center">
+                     @if (ViewBag.AllowCommissionEdit == true @*|| User.IsAdmin()*@)
+                    {
+                        <a asp-controller="Commission" asp-action="Edit" asp-route-id="@commission.Id" class="btn btn-warning">Edit</a>
+                        <a asp-controller="Commission" asp-action="Delete" asp-route-id="@commission.Id" class="btn btn-danger">Delete</a>
+                    }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+}
