@@ -1,5 +1,6 @@
 ﻿using ArtOrder03.Core.Models.Products;
 using ArtOrder03.Infrastructure.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
@@ -12,6 +13,11 @@ namespace ArtOrder03.Controllers
         public ProductsController(ApplicationDbContext data)
         {
             this.data = data;   
+        }
+
+        public IActionResult Details()
+        {
+            return View();
         }
 
         public IActionResult Add()
@@ -42,7 +48,7 @@ namespace ArtOrder03.Controllers
                 AllProductsSorting.DateCreatedDescending => productQuery.OrderByDescending(p => p.Id)                
             };
 
-            var totalProducts = this.data.Products.Count();
+            var totalProducts = productQuery.Count();
 
             var products = productQuery
                 .Skip((query.CurrentPage -1) * AllProductsSearchViewModel.ProductsPerPage)
@@ -71,6 +77,7 @@ namespace ArtOrder03.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Add(AddProductFormModel product)
         {
             if (!this.data.Categories.Any(c => c.Id == product.CategoryId))

@@ -1,0 +1,28 @@
+﻿@using ArtOrder03.Core.Models.Commission
+@model IEnumerable<CommissionListingViewModel>
+
+@{
+    ViewData["Title"] = "Commissions";
+}
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <h2 class="heading-margin text-center">@ViewBag.Title</h2>
+
+        @foreach (var commission in Model)
+        {
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" width="300" height="250" src="~/img/commissionImage.jpg" alt="@commission.Name @commission.Description @commission.Type">
+                <div class="card-body">
+                    <h5 class="card-title">@commission.Name</h5>
+                    <p class="small text">@commission.Type</p>
+                    <h6 class="card-text">@commission.Description</h6><br>
+                    @*<p class="card-text">@product.Description</p>*@
+                    <a asp-controller="Commission" asp-action="Details" asp-route-id="@commission.Id" class="btn btn-outline-primary">Details</a>
+                </div>
+            </div>
+            <div class="space">
+            </div>
+        }
+    </div>
+</div>

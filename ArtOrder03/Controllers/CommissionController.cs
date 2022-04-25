@@ -14,27 +14,26 @@ namespace ArtOrder03.Controllers
         {
             this.data = data;
         }
-
-        public IActionResult Index()
+                
+        public IActionResult Success()
         {
             return View();
-        }
+        } 
         
-        public IActionResult Success()
+        public IActionResult Details()
         {
             return View();
         }
 
         public IActionResult Add()
-        {           
+        {
             return View();
         }
 
         [HttpPost]
         [Authorize]
         public IActionResult Add(AddCommissionFormModel commission)
-        {
-            
+        {            
             var commissionData = new Commission
             {
                 Name = commission.Name,
@@ -48,6 +47,23 @@ namespace ArtOrder03.Controllers
             this.data.SaveChanges();
 
             return RedirectToAction(nameof(Success));
+        }
+
+        public IActionResult All()
+        {
+            var commissions = this.data.Commissions
+               .OrderBy(s => s.Id)
+               .Select(s => new CommissionListingViewModel
+               {
+                   Id = s.Id,
+                   Name = s.Name,
+                   Type = s.Type,
+                   Details = s.Details,
+                   Description = s.Description,
+
+               }).ToList();
+
+            return View(commissions);
         }
     }
 }

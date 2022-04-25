@@ -21,10 +21,12 @@ namespace ArtOrder03.Controllers
         public IActionResult Index()
         {
             var totalProducts = this.data.Products.Count();
+            var totalCommission = this.data.Commissions.Count();
 
             return View(new IndexViewModel
             {
-                TotalProducts = totalProducts
+                TotalProducts = totalProducts,
+                TotalCommissions = totalCommission
             });
 
             return View();
