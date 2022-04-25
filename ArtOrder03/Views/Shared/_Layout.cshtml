@@ -22,23 +22,18 @@
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                        </li>                        
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 USER
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Account</a></li>
+                                <li><a class="dropdown-item" asp-area="Identity" asp-controller="Account" asp-action="Manage">Account</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="Add">Add Product</a></li>                                
                                 <li><a class="dropdown-item" asp-area="" asp-controller="Commission" asp-action="MyCommissions">My Commissions</a></li>
                             </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Commission" asp-action="Add"><strong>SUBMIT COMMISSION</strong></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="AllCategories">Categories</a>
@@ -48,7 +43,10 @@
                         </li>                        
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Commission" asp-action="All">Commissions</a>
-                        </li>
+                        </li>    
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Commission" asp-action="Add">〈 <strong>SUBMIT COMMISSION</strong> 〉</a>
+                        </li>                        
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
@@ -63,9 +61,10 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; @DateTime.Now.Year  - ArtOrder03 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <strong>Copyright &copy; @DateTime.Now.Year <a href="/">Art Order</a>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

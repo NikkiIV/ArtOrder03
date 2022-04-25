@@ -15,9 +15,23 @@ namespace ArtOrder03.Controllers
             this.data = data;   
         }
 
-        public IActionResult Details()
+        public IActionResult Details(int id)
         {
-            return View();
+            var productDetails = this.data.Products
+               .Where(s => s.Id == id)
+               .Select(s => new ProductListingViewModel
+               {
+                   Id = s.Id,
+                   Name = s.Name,
+                   Description = s.Description,
+                   ImageUrl = s.ImageUrl,
+                   Price = s.Price,
+                   Category = s.Category.Name
+
+               })
+               .FirstOrDefault();
+
+            return View(productDetails);
         }
 
         public IActionResult Add()

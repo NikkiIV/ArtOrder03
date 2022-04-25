@@ -1,13 +1,23 @@
-﻿@{
+﻿@using ArtOrder03.Core.Models.Products
+@model ProductListingViewModel
+
+@{
     ViewData["Title"] = "Details Product";
 }
 
-<div>
+<div class="row">
+    <h2 class="heading-margin text-center">@ViewBag.Title</h2>
     <center>
-        <img class="logo" src="~/img/management.png">
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <img class="card-img-top" src="@Model.ImageUrl" alt="@Model.Name @Model.Description">
+                <div class="card-body text-center">
+                    <h5 class="card-title">@Model.Name</h5>
+                    <p class="card-text">@Model.Category</p>
+                    <p class="card-text">@Model.Description</p>
+                    <p class="card-text">@Model.Price</p>
+                </div>
+            </div>
+        </div>
     </center>
-</div>
-
-<div class="text-center">
-    <h1 class="display-4">Details Product. working on it...</h1>
 </div>

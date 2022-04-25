@@ -1,13 +1,23 @@
-﻿@{
+﻿@using ArtOrder03.Core.Models.Commission
+@model CommissionListingViewModel
+
+@{
     ViewData["Title"] = "Details Commission";
 }
 
-<div>
+<div class="row">
+    <h2 class="heading-margin text-center">@ViewBag.Title</h2>
     <center>
-        <img class="logo" src="~/img/management.png">
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <img class="card-img-top" width="300" height="250" src="~/img/commissionImage.jpg" alt="@Model.Name @Model.Description @Model.Type">
+                <div class="card-body text-center">
+                    <h5 class="card-title">@Model.Name</h5>
+                    <p class="card-text">@Model.Type</p>
+                    <p class="card-text">@Model.Description</p>
+                    <p class="card-text">@Model.Details</p>
+                </div>
+            </div>
+        </div>
     </center>
-</div>
-
-<div class="text-center">
-    <h1 class="display-4">Details Commission. working on it...</h1>
 </div>

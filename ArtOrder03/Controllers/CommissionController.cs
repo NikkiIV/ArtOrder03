@@ -20,11 +20,6 @@ namespace ArtOrder03.Controllers
             return View();
         } 
         
-        public IActionResult Details()
-        {
-            return View();
-        }
-
         public IActionResult Add()
         {
             return View();
@@ -91,6 +86,24 @@ namespace ArtOrder03.Controllers
             };
 
             return View(returnModel);
+        }
+
+        public IActionResult Details(int id)
+        {
+            var commissionsDetails = this.data.Commissions
+               .Where(s => s.Id == id)
+               .Select(s => new CommissionListingViewModel
+               {
+                   Id = s.Id,
+                   Name = s.Name,
+                   Type = s.Type,
+                   Details = s.Details,
+                   Description = s.Description,
+
+               })
+               .FirstOrDefault();
+
+            return View(commissionsDetails);
         }
 
     }

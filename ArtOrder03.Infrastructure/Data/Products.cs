@@ -37,10 +37,10 @@ namespace ArtOrder03.Infrastructure.Data
         public decimal Price { get; set; }
 
         //-----SALE
-        [Required]
-        public string SalesId { get; set; }
+        //[Required]
+        //public string SalesId { get; set; }
 
-        [ForeignKey(nameof(Sale))]
-        public Sales Sale { get; set; }
+        //[ForeignKey(nameof(Sale))]
+        //public Sales Sale { get; set; }
     }
 }
