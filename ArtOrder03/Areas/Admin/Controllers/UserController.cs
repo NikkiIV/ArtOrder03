@@ -1,5 +1,7 @@
-﻿using ArtOrder03.Core.Contracts;
+﻿using ArtOrder03.Core.Constants;
+using ArtOrder03.Core.Contracts;
 using ArtOrder03.Infrastructure.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,6 +25,22 @@ namespace ArtOrder03.Areas.Admin.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        [Authorize(Roles = UserConstants.Roles.Administrator)]
+        public async Task<IActionResult> ManageUsers()
+        {
+            var users = await service.GetUsers();
+
+            //return Ok(users);
+            return View(users);
+        }
+
+        public async Task<IActionResult> Edit(string Id)
+        {
+            var model = await service.GetUserForEdit(Id);
+
+            return View(model);
         }
     }
 }

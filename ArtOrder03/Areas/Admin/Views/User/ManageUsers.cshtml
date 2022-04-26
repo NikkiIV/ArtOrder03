@@ -1,0 +1,32 @@
+﻿@using ArtOrder03.Core.Models.User
+@model IEnumerable<UserListViewModel>
+
+@{
+    ViewData["Title"] = "Manage Users";
+}
+
+
+<h2 class="heading-margin text-center">@ViewBag.Title</h2>
+
+<table class="table table-info table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Name</td>
+                <td>@user.Email</td>
+                <td>
+                    <a asp-area="admin" asp-action="edit" asp-controller="user" asp-route-id="@user.Id" class="btn btn-block btn-danger btn-xs">Edit</a>
+                    <a asp-area="admin" asp-action="roles" asp-controller="user" asp-route-id="@user.Id" class="btn btn-block btn-warning btn-xs">Roles</a>
+                </td>                
+            </tr>
+        }
+    </tbody>
+</table>
