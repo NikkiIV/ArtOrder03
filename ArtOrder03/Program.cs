@@ -1,5 +1,9 @@
+using ArtOrder03.Core.Contracts;
+using ArtOrder03.Core.Services;
 using ArtOrder03.Extensions;
 using ArtOrder03.Infrastructure.Data;
+using ArtOrder03.Infrastructure.Data.Common;
+using ArtOrder03.Infrastructure.Data.Repositories;
 using ArtOrder03.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,15 +20,20 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
-        {
-            options.SignIn.RequireConfirmedAccount = true;
-        })
+{
+    options.SignIn.RequireConfirmedAccount = true;
+})
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddControllersWithViews(options =>
 {
     options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
 });
+
+//builder.Services.AddScoped<IRepository, Repository>();
+builder.Services.AddScoped<IApplicationDbRepository, ApplicationDbRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 
