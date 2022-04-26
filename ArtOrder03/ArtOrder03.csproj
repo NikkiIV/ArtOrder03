@@ -24,4 +24,9 @@
     <ProjectReference Include="..\ArtOrder03.Core\ArtOrder03.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Areas\Admin\Views\User\" />
+  </ItemGroup>
+
 </Project>
