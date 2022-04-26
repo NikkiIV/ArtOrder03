@@ -6,10 +6,28 @@
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
-    <li class="nav-item">
+    @*<li class="nav-item">
         <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
-    </li>
-    <li class="nav-item">
+    </li>*@
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                @User.Identity?.Name
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                @if (User.IsInRole("Administrator"))
+                {
+                    <li><a class="nav-link text-dark" asp-area="Admin" asp-controller="User" asp-action="ManageUsers">Admin Panel</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                }
+                
+                <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Account">Account</a></li>
+                <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="Add">Add Product</a></li>
+                <li><a class="dropdown-item" asp-area="" asp-controller="Commission" asp-action="MyCommissions">My Commissions</a></li>
+            </ul>
+        </li>
+        <li class="nav-item">
         <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
             <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
         </form>

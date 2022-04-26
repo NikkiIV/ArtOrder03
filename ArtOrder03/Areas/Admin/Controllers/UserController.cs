@@ -1,9 +1,11 @@
 ﻿using ArtOrder03.Core.Constants;
 using ArtOrder03.Core.Contracts;
+using ArtOrder03.Core.Models.User;
 using ArtOrder03.Infrastructure.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ArtOrder03.Areas.Admin.Controllers
 {
@@ -36,11 +38,82 @@ namespace ArtOrder03.Areas.Admin.Controllers
             return View(users);
         }
 
+        //public async Task<IActionResult> CreateRole()
+        //{
+        //    // --> UnComment only when need to create new role <--
+        //    //await roleManager.CreateAsync(new IdentityRole()
+        //    //{
+        //    //    Name = "Administrator"
+        //    //});
+
+        //    //return Ok();
+        //}
+
         public async Task<IActionResult> Edit(string Id)
         {
             var model = await service.GetUserForEdit(Id);
 
             return View(model);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(UserEditViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            if (await service.UpdateUser(model))
+            {
+                ViewData[MessageConstants.SuccessMessage] = "Успешен запис!";
+            }
+            else
+            {
+                ViewData[MessageConstants.ErrorMessage] = "Грешка!";
+            }
+
+            return RedirectToAction(nameof(ManageUsers));
+            //return View(model);
+        }
+
+        public async Task<IActionResult> Roles(string id)
+        {
+            var user = await service.GetUserById(id);
+            var model = new UserRolesViewModel()
+            {
+                UserId = user.Id,
+                Name = $"{user.FirstName} {user.LastName}"
+            };
+
+
+            ViewBag.RoleItems = roleManager.Roles
+                .ToList()
+                .Select(r => new SelectListItem()
+                {
+                    Text = r.Name,
+                    Value = r.Name,
+                    Selected = userManager.IsInRoleAsync(user, r.Name).Result
+                })
+                .ToList();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Roles(UserRolesViewModel model)
+        {
+            var user = await service.GetUserById(model.UserId);
+            var userRoles = await userManager.GetRolesAsync(user);
+            await userManager.RemoveFromRolesAsync(user, userRoles);
+
+            if (model.RoleNames?.Length > 0)
+            {
+                await userManager.AddToRolesAsync(user, model.RoleNames);
+            }
+
+            return RedirectToAction(nameof(ManageUsers));
+        }
+
     }
 }
