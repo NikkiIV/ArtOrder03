@@ -1,5 +1,6 @@
 ﻿using ArtOrder03.Core.Models.Commission;
 using ArtOrder03.Infrastructure.Data;
+using ArtOrder03.Infrastructure.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -105,6 +106,30 @@ namespace ArtOrder03.Controllers
 
             return View(commissionsDetails);
         }
+
+        //public IActionResult Edit(CommissionEditViewModel model, int id)
+        //{
+        //    bool result = false;
+        //    var commissionsEdit = data.<Commission>(model.Id);
+        //    //var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)
+
+        //    var commissionsEdit = this.data.Commissions.Where(s => s.Id == id);
+
+        //    if (commissionsEdit != null)
+        //    {
+        //        commissionsEdit.Name = model.Name;
+        //        commissionsEdit.Type = model.Type;
+        //        commissionsEdit.Details = model.Details;
+        //        commissionsEdit.Description = model.Description;
+                
+
+        //        data.SaveChanges();
+        //        result = true;
+        //    }
+                       
+
+        //    return result;
+        //}
 
     }
 }
