@@ -1,0 +1,49 @@
+﻿@using ArtOrder03.Core.Models.Products
+@model ProductEditViewModel
+
+@{
+    ViewData["Title"] = "Edit product";
+}
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <h2 class="heading-margin text-center">@ViewBag.Title</h2>
+
+        <form method="post">
+            @*Title*@
+            <div class="form-group">
+                <label asp-for="Name" class="form-label">Name Product:</label>
+                <input asp-for="Name" class="form-control" placeholder="Use up to 4 words to describe the product...">
+
+                <span asp-validation-for="Name" class="small text-danger"></span>
+            </div>
+            <br />
+            @*IMAGE*@
+            <div class="form-group">
+                <label asp-for="ImageUrl" class="form-label">Image:</label>
+                <input asp-for="ImageUrl" class="form-control" placeholder="Your URL here...">
+                <span asp-validation-for="ImageUrl" class="small text-danger"></span>
+            </div>
+            <br />           
+            @*Description*@
+            <div class="form-group">
+                <label asp-for="Description" class="form-label">Description:</label>
+                <textarea asp-for="Description" class="form-control" placeholder="Describe the product here..." rows="4"></textarea>
+                <span asp-validation-for="Description" class="small text-danger"></span>
+
+            </div>
+            <br />
+            @*PRICE*@
+            <p>Price:</p>
+            <div class="input-group">
+                @*<label asp-for="Price" class="form-label">Price:</label>*@
+                <input asp-for="Price" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+                <span class="input-group-text">$</span>
+                <span class="input-group-text">0.00</span>
+                <span asp-validation-for="Price" class="small text-danger"></span>
+            </div>
+            <br />
+            <input class="btn btn-primary mt-3" type="submit" value="Save changes" />
+        </form>
+    </div>
+</div>

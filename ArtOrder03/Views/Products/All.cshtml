@@ -78,6 +78,10 @@
                 <h6 class="card-text">USD @product.Price</h6><br>
                 @*<p class="card-text">@product.Description</p>*@
                 <a asp-controller="Products" asp-action="Details" asp-route-id="@product.Id" class="btn btn-outline-primary">Details</a>
+                @if (User.IsInRole("Administrator"))
+                {
+                    <td><a asp-controller="Products" asp-action="Edit" asp-route-id="@product.Id" class="btn btn-outline-warning">Edit</a></td>
+                }
             </div>
         </div>
         <div class="space">

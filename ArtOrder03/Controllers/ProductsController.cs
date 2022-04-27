@@ -1,4 +1,5 @@
-﻿using ArtOrder03.Core.Models.Products;
+﻿using ArtOrder03.Core.Constants;
+using ArtOrder03.Core.Models.Products;
 using ArtOrder03.Infrastructure.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -132,6 +133,66 @@ namespace ArtOrder03.Controllers
                 .ToList();
 
             return result;
+        }
+
+        public IActionResult Edit(int id)
+        {
+            var model = this.GetProductForEdit(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Edit(ProductEditViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            if (UpdateProduct(model))
+            {
+                ViewData[MessageConstants.SuccessMessage] = "Успешен запис!";
+            }
+            else
+            {
+                ViewData[MessageConstants.ErrorMessage] = "Грешка!";
+            }
+
+            return RedirectToAction(nameof(All));
+        }
+
+        public bool UpdateProduct(ProductEditViewModel model)
+        {
+            bool result = false;
+            var product = this.data.Products.Find(model.Id);
+
+            if (product != null)
+            {
+                product.Name = model.Name;
+                product.ImageUrl = model.ImageUrl;
+                product.Description = model.Description;
+                product.Price = model.Price;
+
+                this.data.SaveChanges();
+                result = true;
+            }
+
+            return result;
+        }
+
+        public ProductEditViewModel GetProductForEdit(int id)
+        {
+            var product = this.data.Products.Find(id);
+
+            return new ProductEditViewModel()
+            {
+                Name = product.Name,
+                ImageUrl = product.ImageUrl,
+                Description = product.Description,
+                Price = product.Price
+            };
         }
     }
 }
