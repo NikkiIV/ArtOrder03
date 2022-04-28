@@ -1,4 +1,5 @@
-﻿using ArtOrder03.Core.Models.Home;
+﻿using ArtOrder03.Core.Constants;
+using ArtOrder03.Core.Models.Home;
 using ArtOrder03.Infrastructure.Data;
 using ArtOrder03.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -20,6 +21,10 @@ namespace ArtOrder03.Controllers
 
         public IActionResult Index()
         {
+            //ViewData[MessageConstant.ErrorMessage] = "Грешка!";
+            //ViewData[MessageConstants.WarningMessage] = "Внимавай!";
+            ViewData[MessageConstants.SuccessMessage] = "Работи!";
+
             var totalProducts = this.data.Products.Count();
             var totalCommission = this.data.Commissions.Count();
 
@@ -29,7 +34,7 @@ namespace ArtOrder03.Controllers
                 TotalCommissions = totalCommission
             });
 
-            return View();
+            //return View();
         }
 
         public IActionResult Privacy()
