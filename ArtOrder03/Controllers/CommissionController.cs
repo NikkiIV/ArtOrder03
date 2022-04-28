@@ -26,6 +26,11 @@ namespace ArtOrder03.Controllers
             return View();
         }
 
+        public IActionResult Info()
+        {
+            return View();
+        }
+
         [HttpPost]
         [Authorize]
         public IActionResult Add(AddCommissionFormModel commission)

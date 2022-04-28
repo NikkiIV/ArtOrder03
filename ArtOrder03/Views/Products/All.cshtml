@@ -1,7 +1,6 @@
 ﻿@using ArtOrder03.Core.Models.Products
 @model AllProductsSearchViewModel
 
-
 @{
     ViewData["Title"] = "All products";
 }
@@ -81,6 +80,7 @@
                 @if (User.IsInRole("Administrator"))
                 {
                     <td><a asp-controller="Products" asp-action="Edit" asp-route-id="@product.Id" class="btn btn-outline-warning">Edit</a></td>
+                    @*<td><a asp-controller="Products" asp-action="Delete" asp-route-id="@product.Id" class="btn btn-outline-danger">Delete</a></td>*@                    
                 }
             </div>
         </div>
