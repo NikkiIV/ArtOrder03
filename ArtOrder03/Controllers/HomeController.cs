@@ -23,7 +23,7 @@ namespace ArtOrder03.Controllers
         {
             //ViewData[MessageConstant.ErrorMessage] = "Грешка!";
             //ViewData[MessageConstants.WarningMessage] = "Внимавай!";
-            ViewData[MessageConstants.SuccessMessage] = "Работи!";
+            ViewData[MessageConstants.SuccessMessage] = "Welcome to ArtOrder!";
 
             var totalProducts = this.data.Products.Count();
             var totalCommission = this.data.Commissions.Count();

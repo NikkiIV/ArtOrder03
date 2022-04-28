@@ -16,7 +16,7 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 @if (User.IsInRole("Administrator"))
                 {
-                    <li><a class="nav-link text-dark" asp-area="Admin" asp-controller="User" asp-action="ManageUsers">Admin Panel</a></li>                    
+                    <li><a class="nav-link text-dark" asp-area="Admin" asp-controller="Home" asp-action="Index">Admin Panel</a></li>                    
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="Add">Add Product</a></li>
                     <li><a class="dropdown-item" asp-area="" asp-controller="Commission" asp-action="All">All Commissions</a></li>
