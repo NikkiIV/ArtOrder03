@@ -41,7 +41,8 @@ namespace ArtOrder03.Controllers
                 Type = commission.Type,
                 Details = commission.Details,
                 Description = commission.Description,
-                UserId = User.FindFirstValue(ClaimTypes.NameIdentifier)
+                UserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
+                Hidden = true
             };
 
             this.data.Commissions.Add(commissionData);
@@ -53,7 +54,8 @@ namespace ArtOrder03.Controllers
         public IActionResult All()
         {
             var commissions = this.data.Commissions
-               .OrderBy(s => s.Id)
+               .OrderBy(s => s.Hidden)
+               .Where(a => a.Hidden == true)
                .Select(s => new CommissionListingViewModel
                {
                    Id = s.Id,
@@ -112,29 +114,16 @@ namespace ArtOrder03.Controllers
             return View(commissionsDetails);
         }
 
-        //public IActionResult Edit(CommissionEditViewModel model, int id)
-        //{
-        //    bool result = false;
-        //    var commissionsEdit = data.<Commission>(model.Id);
-        //    //var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)
+        public IActionResult Hide(int id)
+        {
+            var commission = this.data.Commissions.Find(id);
 
-        //    var commissionsEdit = this.data.Commissions.Where(s => s.Id == id);
+            commission.Hidden = !commission.Hidden;
 
-        //    if (commissionsEdit != null)
-        //    {
-        //        commissionsEdit.Name = model.Name;
-        //        commissionsEdit.Type = model.Type;
-        //        commissionsEdit.Details = model.Details;
-        //        commissionsEdit.Description = model.Description;
-                
+            this.data.SaveChanges();
 
-        //        data.SaveChanges();
-        //        result = true;
-        //    }
-                       
-
-        //    return result;
-        //}
+            return RedirectToAction(nameof(All));
+        }
 
     }
 }

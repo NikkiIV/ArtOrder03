@@ -80,7 +80,7 @@
                 @if (User.IsInRole("Administrator"))
                 {
                     <td><a asp-controller="Products" asp-action="Edit" asp-route-id="@product.Id" class="btn btn-outline-warning">Edit</a></td>
-                    @*<td><a asp-controller="Products" asp-action="Delete" asp-route-id="@product.Id" class="btn btn-outline-danger">Delete</a></td>*@                    
+                    <td><a asp-controller="Products" asp-action="Hide" asp-route-id="@product.Id" class="btn btn-danger float-right ml-3">Remove</a></td>               
                 }
             </div>
         </div>

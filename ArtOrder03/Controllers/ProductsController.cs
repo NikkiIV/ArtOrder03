@@ -68,6 +68,7 @@ namespace ArtOrder03.Controllers
             var products = productQuery
                 .Skip((query.CurrentPage -1) * AllProductsSearchViewModel.ProductsPerPage)
                 .Take(AllProductsSearchViewModel.ProductsPerPage)
+                .Where(a => a.Hidden == true)
                 .Select(p => new ProductListingViewModel
                 {
                     Id = p.Id,
@@ -113,7 +114,8 @@ namespace ArtOrder03.Controllers
                 ImageUrl = product.ImageUrl,
                 Description = product.Description,
                 Price = product.Price,
-                CategoryId = product.CategoryId
+                CategoryId = product.CategoryId,
+                Hidden = true
             };
 
             this.data.Products.Add(productData);
@@ -193,6 +195,17 @@ namespace ArtOrder03.Controllers
                 Description = product.Description,
                 Price = product.Price
             };
+        }
+
+        public IActionResult Hide(int id)
+        {
+            var product = this.data.Products.Find(id);
+
+            product.Hidden = !product.Hidden;
+
+            this.data.SaveChanges();
+
+            return RedirectToAction(nameof(All));
         }
 
     }

@@ -31,5 +31,7 @@ namespace ArtOrder03.Infrastructure.Data
         public string UserId { get; set; }
 
         public virtual ApplicationUser User { get; set; }
+
+        public bool Hidden { get; set; }
     }
 }

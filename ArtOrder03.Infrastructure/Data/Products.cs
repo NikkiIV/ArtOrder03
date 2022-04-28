@@ -42,5 +42,7 @@ namespace ArtOrder03.Infrastructure.Data
 
         //[ForeignKey(nameof(Sale))]
         //public Sales Sale { get; set; }
+
+        public bool Hidden { get; set; } 
     }
 }
