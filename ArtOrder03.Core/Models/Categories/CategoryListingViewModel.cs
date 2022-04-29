@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ArtOrder03.Core.Models.Products
+namespace ArtOrder03.Core.Models.Categories
 {
     public class CategoryListingViewModel
     {

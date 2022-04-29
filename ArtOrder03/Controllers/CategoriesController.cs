@@ -1,4 +1,4 @@
-﻿using ArtOrder03.Core.Models.Products;
+﻿using ArtOrder03.Core.Models.Categories;
 using ArtOrder03.Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 

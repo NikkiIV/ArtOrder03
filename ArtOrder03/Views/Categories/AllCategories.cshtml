@@ -1,10 +1,10 @@
-﻿@using ArtOrder03.Core.Models.Products
+﻿@using ArtOrder03.Core.Models.Categories
 @model IEnumerable<CategoryListingViewModel>
 
 
 <div style="text-align:center">
     <div class="btn-group" role="group" aria-label="Category Buttons">
-        <form action="https://localhost:7098/Products/All?SearchTerm=Magnets">
+        <form action="https://localhost:7098/Products/All?SearchTerm=&OneCategory=Magnets&Sorting=0">
             <input type="submit" class="btn btn-outline-primary" value="BROWSE MAGNETS" />
         </form>
         <div class="space">
@@ -26,6 +26,7 @@
 </div>
 </br>
 
+
 <div class="row">
     
     @foreach (var allcategories in Model)
@@ -36,7 +37,7 @@
             <div class="card-body">
                 <h5 class="card-title">@allcategories.Name</h5>
                 <p class="card-text">@allcategories.Description</p>
-                @*<a asp-controller="Categories" asp-action="Details"  asp-route-id="@allcategories.Id" class="btn btn-primary">Browse</a>*@
+                @*<a asp-area="" asp-controller="Product" asp-action="All" asp-route-OneCategory="@allcategories.Name" class="btn btn-primary">Browse @allcategories.Name</a>*@
             </div>
         </div>
         <div class="space">

@@ -48,7 +48,12 @@ namespace ArtOrder03.Controllers
         public IActionResult All([FromQuery]AllProductsSearchViewModel query)
         {
             var productQuery = this.data.Products.AsQueryable();
-                      
+
+            if (!string.IsNullOrWhiteSpace(query.OneCategory))
+            {
+                productQuery = productQuery.Where(r => r.Category.Name == query.OneCategory);
+            }
+
             if (!string.IsNullOrWhiteSpace(query.SearchTerm))
             {
                 productQuery = productQuery.Where(p => 
@@ -56,6 +61,13 @@ namespace ArtOrder03.Controllers
                 p.Description.ToLower().Contains(query.SearchTerm.ToLower()) ||
                 p.Name.ToLower().Contains(query.SearchTerm.ToLower()));
             }
+
+            var productCategory = this.data
+               .Products
+               .Select(r => r.Category.Name)
+               .Distinct()
+               .OrderBy(r => r)
+               .ToList();
 
             productQuery = query.Sorting switch
             {
@@ -86,6 +98,7 @@ namespace ArtOrder03.Controllers
             //    productQuery.DateCreatedDescending or _ => productQuery.OrderByDescending(r => r.Id)
             //};
 
+            query.ChooseCategory = productCategory;
             query.TotalProducts = totalProducts;
             query.Products = products;
 
